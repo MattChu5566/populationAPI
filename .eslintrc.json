@@ -9,5 +9,8 @@
         "sourceType": "module"
     },
     "rules": {
+    },
+    "settings": {
+        "import/core-modules": ["react-icons/bs"]
     }
 }

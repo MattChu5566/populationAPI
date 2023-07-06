@@ -11,3 +11,105 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.navbar {
+  background-color: rgb(100, 0, 255);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.500);
+}
+
+.logo {
+  color: white;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.option {
+  width: 25px;
+  height: 25px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  color:white;
+  margin-right: 10px;
+  border: 1px rgb(150, 150, 150) solid;
+  border-radius: 5px;
+}
+
+.bg-layout {
+  display: flex;
+  margin-top: 5px;
+}
+
+.bg-wrapper {
+  width: 150px;
+}
+
+.bg-text {
+  height: 1em;
+  width: fit-content;
+  font-size: 150px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  translate: 0 -100%;
+  transform-origin: left bottom;
+  transform: rotate(90deg);
+  background: linear-gradient(to right, red, orange, green, blue);
+  background-clip: text;
+  color: rgba(255, 255, 255, 0);
+}
+
+.query-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  align-items: start;
+  height: 50px;
+  gap: 150px;
+}
+
+label {
+  position: relative;
+  font-size: small;
+  background-color: white;
+  display: block;
+  height: 20px;
+}
+
+label span {
+  width: fit-content;
+}
+
+label.year {
+  width:80px;
+}
+
+select {
+  position: absolute;
+  top: 12px;
+  left: -10px;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+#county {
+  width:120px;
+}
+
+#district {
+  width:120px;
+}
+
+.submit-btn {
+  align-self: center;
+  font-size: x-small;
+  padding: 6px;
+}
