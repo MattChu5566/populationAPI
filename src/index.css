@@ -111,5 +111,7 @@ select {
 .submit-btn {
   align-self: center;
   font-size: x-small;
-  padding: 6px;
+  padding: 7px;
+  border: none;
+  border-radius: 3px;
 }

@@ -11,6 +11,6 @@
     "rules": {
     },
     "settings": {
-        "import/core-modules": ["react-icons/bs"]
+        "import/core-modules": ["react-icons/bs", "uuid"]
     }
 }

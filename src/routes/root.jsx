@@ -1,45 +1,52 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import years from '../lib/getYears';
 import getCountyDistrict from '../lib/getCountyDistrict';
 import getData from '../lib/getData';
 
 export default function Root() {
-  const [year, setYear] = useState('111');
-  const [county, setCounty] = useState(null);
-  const [district, setDistrict] = useState(null); console.log(district);
   const dataThisYear = useRef([]);
 
-  let countyOptions;
-  let districtOptions;
-  if (dataThisYear.current.length !== 0) {
-    const [countyArray, districtMap] = getCountyDistrict(dataThisYear.current);
-    countyOptions = countyArray;
-    districtOptions = districtMap.get(county);
-  }
+  const setCountyOptions = () => {
+    const countySelect = document.getElementById('county');
+    countySelect.innerHTML = '';
+    const [countyArray] = getCountyDistrict(dataThisYear.current);
+    countyArray.forEach(
+      (county, i) => countySelect.append(new Option(county, county, i === 0, false)),
+    );
+  };
+
+  const setDistrictOptions = () => {
+    const countySelect = document.getElementById('county');
+    const districtSelect = document.getElementById('district');
+    districtSelect.innerHTML = '';
+    const [, districtMap] = getCountyDistrict(dataThisYear.current);
+    const districtArray = districtMap.get(countySelect.value);
+    districtArray.forEach(
+      (district, i) => districtSelect.append(new Option(district, district, i === 0, false)),
+    );
+  };
 
   useEffect(() => {
-    const getDataThisYear = async (y) => {
+    const getDataFromYear = async (y) => {
       const responseData = await getData(y);
       dataThisYear.current = responseData;
-      const firstCounty = getCountyDistrict(responseData)[0][0];
-      setCounty(firstCounty);
+      setCountyOptions();
+      setDistrictOptions();
+    };
+    getDataFromYear('111');
+  }, []);
+
+  const fetchDataOtherYear = () => {
+    const anotherYear = document.getElementById('year').value;
+    const getDataFromYear = async (y) => {
+      const responseData = await getData(y);
+      dataThisYear.current = responseData;
+      setCountyOptions();
+      setDistrictOptions();
     };
 
-    getDataThisYear(year);
-    return () => {
-      dataThisYear.current = [];
-    };
-  }, [year]);
-
-  useEffect(() => {
-    if (districtOptions) {
-      setDistrict(districtOptions[0]);
-    }
-  }, [year, county, districtOptions]);
-
-  const handleSelectChange = (eleId, setState) => {
-    const ele = document.getElementById(eleId);
-    setState(ele.value);
+    getDataFromYear(anotherYear);
   };
 
   return (
@@ -50,23 +57,19 @@ export default function Root() {
       <form>
         <label className="year" htmlFor="year">
           <span>年份</span>
-          <select id="year" onChange={() => handleSelectChange('year', setYear)}>
-            {years.map((y) => <option value={y}>{y}</option>)}
+          <select id="year" onChange={() => fetchDataOtherYear()}>
+            {years.map((y) => <option key={uuidv4()} value={y}>{y}</option>)}
           </select>
         </label>
 
         <label className="county" htmlFor="county">
           <div>縣/市</div>
-          <select id="county" onChange={() => handleSelectChange('county', setCounty)}>
-            {countyOptions?.map((c) => <option value={c}>{c}</option>)}
-          </select>
+          <select id="county" onChange={() => setDistrictOptions()}>{}</select>
         </label>
 
         <label className="district" htmlFor="district">
           <div>區</div>
-          <select id="district" onChange={() => handleSelectChange('district', setDistrict)}>
-            {districtOptions?.map((d) => <option value={d}>{d}</option>)}
-          </select>
+          <select id="district">dd</select>
         </label>
 
         <input type="submit" value="SUBMIT" className="submit-btn" />
