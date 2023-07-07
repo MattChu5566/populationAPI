@@ -9,6 +9,13 @@
         "sourceType": "module"
     },
     "rules": {
+        "react/jsx-props-no-spreading": [0, {
+            "html": "ignore",
+            "custom": "ignore",
+            "explicitSpread": "ignore",
+            "exceptions": []
+        }],
+        "react/prop-types": [0, {}]
     },
     "settings": {
         "import/core-modules": ["react-icons/bs", "uuid"]

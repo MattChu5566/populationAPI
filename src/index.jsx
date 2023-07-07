@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 import Root from './routes/root';
 
+import { ContextProvider } from './lib/Context';
 import { Navbar, Background, ErrorPage } from './components/index';
 
 const router = createBrowserRouter([
@@ -24,7 +25,9 @@ root.render(
     <Navbar />
     <div className="bg-layout">
       <Background />
-      <RouterProvider router={router} />
+      <ContextProvider>
+        <RouterProvider router={router} />
+      </ContextProvider>
     </div>
   </React.StrictMode>,
 );
