@@ -32,7 +32,6 @@ export default function Root() {
 
   const clearCountyOptions = () => {
     document.getElementById('county').innerHTML = '';
-    document.getElementById('county').value = '';
     countyOptionsRef.current = [];
     setCounty('');
   };
@@ -60,18 +59,6 @@ export default function Root() {
     const responseData = await getData(y);
     dataThisYear.current = responseData;
   };
-
-  /* useEffect(() => {
-    document.getElementById('year').value = '';
-  }, []);
-
-  useEffect(() => {
-    document.getElementById('county').value = '';
-  }, [year]);
-
-  useEffect(() => {
-    document.getElementById('district').value = '';
-  }, [year, county]); */
 
   return (
     <div className="query-wrapper">
