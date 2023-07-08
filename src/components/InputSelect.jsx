@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 function InputSelect({
-  label, labelWord, optionArray, state, selectChangeHandler, disabled = false,
+  label, labelWord, placeholder, optionArray, state, selectChangeHandler, disabled = false,
 }) {
   return (
     <label className={label} htmlFor={label}>
@@ -11,6 +11,7 @@ function InputSelect({
         onChange={(e) => selectChangeHandler(e)}
         disabled={disabled}
       >
+        <option selected disabled hidden>{label === 'district' && !disabled ? '請選擇區' : placeholder}</option>
         {optionArray.map((option) => (
           <option
             selected={option === state}
@@ -21,7 +22,7 @@ function InputSelect({
           </option>
         ))}
       </select>
-      <span className={disabled && 'disabled'}>{labelWord}</span>
+      {disabled ? <span className="disabled">{labelWord}</span> : <span>{labelWord}</span>}
       <input className={`autoselect${label}`} disabled={disabled} />
     </label>
   );

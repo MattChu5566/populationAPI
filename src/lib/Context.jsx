@@ -7,9 +7,10 @@ import {
 const Context = createContext(null);
 
 export function ContextProvider(props) {
-  const [year, setYear] = useState('111');
+  const [year, setYear] = useState('');
   const [county, setCounty] = useState('');
   const [district, setDistrict] = useState('');
+
   const { children } = props;
   return (
     <Context.Provider
@@ -19,7 +20,7 @@ export function ContextProvider(props) {
         county,
         setCounty,
         district,
-        setDistrict
+        setDistrict,
       }}
     >
       {children}

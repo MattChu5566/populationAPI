@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo } from 'react';
+import { useRef, useMemo } from 'react';
 import getCountyDistrict from '../lib/getCountyDistrict';
 import getData from '../lib/getData';
 import { useStateContext } from '../lib/Context';
@@ -6,10 +6,13 @@ import InputSelect from '../components/InputSelect';
 
 export default function Root() {
   const {
-    year, setYear, county, setCounty, district, setDistrict,
+    year, setYear,
+    county, setCounty,
+    district, setDistrict,
   } = useStateContext();
 
   const dataThisYear = useRef([]);
+
   const countyOptionsRef = useRef([]);
   const districtOptionsRef = useRef([]);
   const countyOptions = countyOptionsRef.current;
@@ -24,42 +27,51 @@ export default function Root() {
   }, []);
 
   const getCountyOptions = () => {
-    const countySelect = document.getElementById('county');
-    countySelect.innerHTML = '';
-    const [countyArray] = getCountyDistrict(dataThisYear.current);
-    countyArray.forEach(
-      (c) => countySelect.append(new Option(c, c, false, false)),
-    );
-    countySelect.value = '';
-    countyOptionsRef.current = countyArray;
+    [countyOptionsRef.current] = getCountyDistrict(dataThisYear.current);
+  };
+
+  const clearCountyOptions = () => {
+    document.getElementById('county').innerHTML = '';
+    document.getElementById('county').value = '';
+    countyOptionsRef.current = [];
+    setCounty('');
+  };
+
+  const clearDistrictOptions = () => {
+    document.getElementById('district').innerHTML = '';
+    districtOptionsRef.current = [];
+    setDistrict('');
+  };
+
+  const disableDistrictSubmitBtn = () => {
+    document.getElementById('district').disabled = true;
+    document.querySelector('label.district span').className = 'disabled';
+    document.querySelector('label.district input').disabled = true;
+    document.querySelector('.submit-btn').disabled = true;
   };
 
   const getDistrictOptions = () => {
-    const countySelect = document.getElementById('county');
-    const districtSelect = document.getElementById('district');
-    districtSelect.innerHTML = '';
     const [, districtMap] = getCountyDistrict(dataThisYear.current);
-    const districtArray = districtMap.get(countySelect.value);
-    districtArray.forEach(
-      (d, i) => districtSelect.append(new Option(d, d, i === 0, false)),
-    );
-    districtSelect.disabled = false;
-    districtSelect.value = '';
+    const districtArray = districtMap.get(document.getElementById('county').value);
     districtOptionsRef.current = districtArray;
   };
 
+  const getDataOnYearChange = async (y) => {
+    const responseData = await getData(y);
+    dataThisYear.current = responseData;
+  };
+
+  /* useEffect(() => {
+    document.getElementById('year').value = '';
+  }, []);
+
   useEffect(() => {
-    const getDataForYearChange = async (y) => {
-      const responseData = await getData(y);
-      dataThisYear.current = responseData;
-      getCountyOptions();
-    };
-    getDataForYearChange(year);
+    document.getElementById('county').value = '';
   }, [year]);
 
   useEffect(() => {
-    if (county) getDistrictOptions();
-  }, [county]);
+    document.getElementById('district').value = '';
+  }, [year, county]); */
 
   return (
     <div className="query-wrapper">
@@ -70,33 +82,43 @@ export default function Root() {
         <InputSelect
           label="year"
           labelWord="年份"
+          placeholder=""
           optionArray={yearOptions}
           state={year}
           selectChangeHandler={(e) => {
-            countyOptionsRef.current = [];
-            districtOptionsRef.current = [];
-            setCounty('');
-            document.getElementById('county').value = '';
-            setYear(e.target.value);
+            clearCountyOptions();
+            clearDistrictOptions();
+            disableDistrictSubmitBtn();
+            getDataOnYearChange(e.target.value)
+              .then(
+                () => getCountyOptions(),
+              )
+              .then(
+                () => {
+                  setYear(e.target.value);
+                },
+              );
           }}
         />
 
         <InputSelect
           label="county"
           labelWord="縣/市"
+          placeholder="請選擇 縣/市"
           optionArray={countyOptions}
           state={county}
           selectChangeHandler={(e) => {
-            districtOptionsRef.current = [];
-            setDistrict('');
-            document.getElementById('district').value = '';
+            clearDistrictOptions();
+            getDistrictOptions();
             setCounty(e.target.value);
           }}
+          disabled={!year}
         />
 
         <InputSelect
           label="district"
           labelWord="區"
+          placeholder="請先選擇 縣/市"
           optionArray={districtOptions}
           state={district}
           selectChangeHandler={(e) => setDistrict(e.target.value)}
@@ -107,7 +129,7 @@ export default function Root() {
           type="submit"
           value="SUBMIT"
           className="submit-btn"
-          disabled={!document.getElementById('year')?.value || !document.getElementById('county').value || !document.getElementById('district').value}
+          disabled={!year || !county || !district}
         />
 
       </form>
