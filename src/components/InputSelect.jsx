@@ -10,6 +10,19 @@ function InputSelect({
         id={label}
         onChange={(e) => selectChangeHandler(e)}
         disabled={disabled}
+        onFocus={(e) => {
+          const inputEle = e.target.parentElement.querySelector('input');
+          inputEle.classList.remove('hide');
+        }}
+        onBlur={(e) => {
+          const inputEle = e.target.parentElement.querySelector('input');
+          inputEle.classList.add('hide');
+        }}
+        onKeyDown={(e) => {
+          e.preventDefault();
+          e.returnValue = false;
+          e.cancel = true;
+        }}
       >
         <option selected disabled hidden>{label === 'district' && !disabled ? '請選擇區' : placeholder}</option>
         {optionArray.map((option) => (
@@ -23,7 +36,10 @@ function InputSelect({
         ))}
       </select>
       {disabled ? <span className="disabled">{labelWord}</span> : <span>{labelWord}</span>}
-      <input className={`autoselect${label}`} disabled={disabled} />
+      <input
+        className={`autoselect${label} hide`}
+        disabled={disabled}
+      />
     </label>
   );
 }

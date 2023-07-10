@@ -74,107 +74,43 @@ code {
 form {
   display: flex;
   height: 50px;
-  gap: 20px;
+  gap: 10px;
   margin-top: 10px;
 }
 
-label {
-  font-size: small;
-  background-color: white;
-  display: block;
-  height: 20px;
-  position:relative;
-}
-
-label span {
+.react-select {
   position: relative;
-  width: fit-content;
-  background-color: white;
-  z-index: 3;
-  top: -10px;
-  left: 10px;
+  height: fit-content;
 }
 
-label span.disabled {
-  color: rgb(180, 180, 180);
-}
-
-label.year {
-  width:50px;
-}
-
-label.county, label.district {
-  width:110px;
-}
-
-select {
+label {
   position: absolute;
-  padding: 5px;
-  padding-top: 10px;
-  border-radius: 3px;
   z-index: 1;
+  font-size: 2px;
+  left: 10px;
+  top: -8px;
+  background-color: white;
 }
 
-label input {
-  position: absolute;
-  z-index: 2;
-  left: 2px;
-  top: 2px;
-  height: 24px;
-  /*visibility: hidden;*/
-  opacity: 50%;
-  color: red;
-  /*background-color: white;*/
-  /*border: none;*/
-}
-
-.autoselectyear {
-  width: 30px;
-}
-
-.autoselectcounty {
-  width: 90px;
-}
-
-.autoselectdistrict {
-  width: 90px;
-}
-
-input:focus {
-  outline: none;
-}
-
-select:focus {
-  outline: 2px solid rgb(162, 0, 255);
-}
-
-select:focus + span {
+label.focus {
   color: rgb(162, 0, 255);
 }
 
-#year {
-  width: 60px;
-}
-
-#county, #district {
-  width:120px;
-}
-
-.cancel-btn:hover {
-  background-color: red;
+label.disabled {
+  color:rgb(200, 200, 200);
 }
 
 .submit-btn {
   align-self: center;
   font-size: x-small;
-  padding: 7px;
+  padding: 10px;
   padding-left: 10px;
   padding-right: 10px;
   border: none;
   border-radius: 3px;
   position: relative;
   top: -8px;
-  height: 35px;
+  height: 38px;
 }
 
 hr {

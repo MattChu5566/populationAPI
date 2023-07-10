@@ -1,8 +1,11 @@
 import { useRef, useMemo } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import getCountyDistrict from '../lib/getCountyDistrict';
 import getData from '../lib/getData';
 import { useStateContext } from '../lib/Context';
-import InputSelect from '../components/InputSelect';
+import YearReactSelect from '../components/YearReactSelect';
+import CountyReactSelect from '../components/CountyReactSelect';
+import DistrictReactSelect from '../components/DistrictReactSelect';
 
 export default function Root() {
   const {
@@ -17,7 +20,6 @@ export default function Root() {
   const districtOptionsRef = useRef([]);
   const countyOptions = countyOptionsRef.current;
   const districtOptions = districtOptionsRef.current;
-
   const yearOptions = useMemo(() => {
     const years = [];
     for (let i = 111; i >= 106; i -= 1) {
@@ -26,38 +28,34 @@ export default function Root() {
     return years;
   }, []);
 
+  const countyIsSelected = useRef(false);
+  const districtIsSelected = useRef(false);
+
+  const getDataOnYearChange = async (yearSelected) => {
+    const responseData = await getData(yearSelected);
+    dataThisYear.current = responseData;
+  };
+
   const getCountyOptions = () => {
     [countyOptionsRef.current] = getCountyDistrict(dataThisYear.current);
   };
 
   const clearCountyOptions = () => {
-    document.getElementById('county').innerHTML = '';
     countyOptionsRef.current = [];
+    countyIsSelected.current = false;
     setCounty('');
   };
 
-  const clearDistrictOptions = () => {
-    document.getElementById('district').innerHTML = '';
-    districtOptionsRef.current = [];
-    setDistrict('');
-  };
-
-  const disableDistrictSubmitBtn = () => {
-    document.getElementById('district').disabled = true;
-    document.querySelector('label.district span').className = 'disabled';
-    document.querySelector('label.district input').disabled = true;
-    document.querySelector('.submit-btn').disabled = true;
-  };
-
-  const getDistrictOptions = () => {
+  const getDistrictOptions = (countySelected) => {
     const [, districtMap] = getCountyDistrict(dataThisYear.current);
-    const districtArray = districtMap.get(document.getElementById('county').value);
+    const districtArray = districtMap.get(countySelected);
     districtOptionsRef.current = districtArray;
   };
 
-  const getDataOnYearChange = async (y) => {
-    const responseData = await getData(y);
-    dataThisYear.current = responseData;
+  const clearDistrictOptions = () => {
+    districtOptionsRef.current = [];
+    districtIsSelected.current = false;
+    setDistrict('');
   };
 
   return (
@@ -65,51 +63,57 @@ export default function Root() {
       <h2 className="query-title">
         人口數、戶數按戶別及性別統計
       </h2>
-      <form>
-        <InputSelect
-          label="year"
-          labelWord="年份"
-          placeholder=""
+      <form id="form">
+        <YearReactSelect
+          year={year}
           optionArray={yearOptions}
-          state={year}
-          selectChangeHandler={(e) => {
-            clearCountyOptions();
-            clearDistrictOptions();
-            disableDistrictSubmitBtn();
-            getDataOnYearChange(e.target.value)
-              .then(
-                () => getCountyOptions(),
-              )
-              .then(
-                () => {
-                  setYear(e.target.value);
-                },
-              );
+          isDisabled={false}
+          selectHandler={(selectedOption) => {
+            if (selectedOption.value !== year) {
+              clearCountyOptions();
+              clearDistrictOptions();
+              getDataOnYearChange(selectedOption.value)
+                .then(
+                  () => getCountyOptions(),
+                )
+                .then(
+                  () => {
+                    setYear(selectedOption.value);
+                  },
+                );
+            }
           }}
         />
 
-        <InputSelect
-          label="county"
-          labelWord="縣/市"
-          placeholder="請選擇 縣/市"
+        <CountyReactSelect
+          key={uuidv4()}
+          year={year}
+          county={county}
+          countyIsSelected={countyIsSelected.current}
           optionArray={countyOptions}
-          state={county}
-          selectChangeHandler={(e) => {
-            clearDistrictOptions();
-            getDistrictOptions();
-            setCounty(e.target.value);
+          isDisabled={!year}
+          selectHandler={(selectedOption) => {
+            if (selectedOption.value !== county) {
+              clearDistrictOptions();
+              getDistrictOptions(selectedOption.value);
+              countyIsSelected.current = true;
+              districtIsSelected.current = false;
+              setCounty(selectedOption.value);
+            }
           }}
-          disabled={!year}
         />
 
-        <InputSelect
-          label="district"
-          labelWord="區"
-          placeholder="請先選擇 縣/市"
+        <DistrictReactSelect
+          key={uuidv4()}
+          county={county}
+          district={district}
+          districtIsSelected={districtIsSelected.current}
           optionArray={districtOptions}
-          state={district}
-          selectChangeHandler={(e) => setDistrict(e.target.value)}
-          disabled={!county}
+          isDisabled={!county}
+          selectHandler={(selectedOption) => {
+            districtIsSelected.current = true;
+            setDistrict(selectedOption.value);
+          }}
         />
 
         <input
@@ -126,6 +130,7 @@ export default function Root() {
           搜尋結果
         </div>
       </div>
+
     </div>
   );
 }
