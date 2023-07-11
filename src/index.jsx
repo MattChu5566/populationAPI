@@ -4,17 +4,23 @@ import './index.css';
 // import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-
 import Root from './routes/root';
-
 import { ContextProvider } from './lib/Context';
 import { Navbar, Background, ErrorPage } from './components/index';
+import Result from './components/Result';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: ':year?/:county?/:district',
+        element: <Result />,
+        // loader: resultLoader,
+      },
+    ],
   },
 ]);
 

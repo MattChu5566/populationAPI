@@ -1,5 +1,6 @@
 import { useRef, useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { Outlet } from 'react-router-dom';
 import getCountyDistrict from '../lib/getCountyDistrict';
 import getData from '../lib/getData';
 import { useStateContext } from '../lib/Context';
@@ -63,7 +64,15 @@ export default function Root() {
       <h2 className="query-title">
         人口數、戶數按戶別及性別統計
       </h2>
-      <form id="form">
+      <form
+        id="form"
+        onSubmit={
+        (e) => {
+          e.preventDefault();
+          window.location = `/${year}/${county}/${district}`;
+        }
+      }
+      >
         <YearReactSelect
           year={year}
           optionArray={yearOptions}
@@ -129,6 +138,10 @@ export default function Root() {
         <div className="search-result">
           搜尋結果
         </div>
+      </div>
+
+      <div>
+        <Outlet />
       </div>
 
     </div>
