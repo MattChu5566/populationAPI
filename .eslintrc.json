@@ -18,6 +18,6 @@
         "react/prop-types": [0, {}]
     },
     "settings": {
-        "import/core-modules": ["react-icons/bs", "uuid"]
+        "import/core-modules": ["react-icons/bs", "uuid", "highcharts", "highcharts-react-official"]
     }
 }

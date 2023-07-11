@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import {
-  createContext, useContext, useState,
+  createContext, useContext, useState, useRef
 } from 'react';
 
 const Context = createContext(null);
@@ -10,6 +10,14 @@ export function ContextProvider(props) {
   const [year, setYear] = useState('');
   const [county, setCounty] = useState('');
   const [district, setDistrict] = useState('');
+
+  const countyIsSelected = useRef(false);
+  const districtIsSelected = useRef(false);
+
+  const data = useRef([]);
+
+  const countyOptionsRef = useRef([]);
+  const districtOptionsRef = useRef([]);
 
   const { children } = props;
   return (
@@ -21,6 +29,11 @@ export function ContextProvider(props) {
         setCounty,
         district,
         setDistrict,
+        countyIsSelected,
+        districtIsSelected,
+        data,
+        countyOptionsRef,
+        districtOptionsRef
       }}
     >
       {children}

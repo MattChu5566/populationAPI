@@ -141,3 +141,29 @@ hr {
   color: rgb(216, 150, 255);
   background-color: white;
 }
+
+.result-wrapper {
+  text-align: center;
+}
+
+/* .highcharts-color-0 {
+  fill: rgb(125, 95, 177);
+}
+
+.highcharts-color-1 {
+  fill:rgb(193, 158, 254);
+}
+
+.highcharts-color-0 rect {
+  fill: rgb(125, 95, 177);
+}
+
+.highcharts-color-1 rect {
+  fill:rgb(193, 158, 254);
+} */
+
+/* .highcharts-yaxis {
+  translate: 0 30px;
+} */
+
+
