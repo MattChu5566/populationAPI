@@ -25,6 +25,9 @@ export default function getPieChartOptions(statisticMap) {
           dataLabels: {
             enabled: true,
             format: '{point.percentage:.1f} %',
+            style: {
+              fontSize: '14px',
+            },
           },
           slicedOffset: '0',
           showInLegend: true,
@@ -33,6 +36,7 @@ export default function getPieChartOptions(statisticMap) {
       legend: {
         enabled: true,
       },
+      colors: ['#626EB2', '#A3B1FF'],
       series: [{
         name: 'Brands',
         colorByPoint: true,

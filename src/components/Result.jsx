@@ -60,7 +60,7 @@ function Result() {
               options={chartOptions[0]}
               containerProps={{
                 style: {
-                  width: '80%', height: '80%', marginLeft: 'auto', marginRight: 'auto',
+                  width: '80%', height: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '100px',
                 },
               }}
             />
@@ -69,7 +69,7 @@ function Result() {
               options={chartOptions[1]}
               containerProps={{
                 style: {
-                  width: '80%', height: '80%', marginLeft: 'auto', marginRight: 'auto',
+                  width: '80%', height: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '100px',
                 },
               }}
             />
