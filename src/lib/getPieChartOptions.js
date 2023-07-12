@@ -25,7 +25,7 @@ export default function getPieChartOptions(statisticMap) {
           allowPointSelect: false,
           dataLabels: {
             enabled: true,
-            format: '{point.percentage:.1f} %',
+            format: '{point.percentage:.2f} %',
             style: {
               fontSize: '14px',
               color: 'black',
@@ -40,7 +40,7 @@ export default function getPieChartOptions(statisticMap) {
       },
       colors: ['#626EB2', '#A3B1FF'],
       series: [{
-        name: 'Brands',
+        name: 'living type',
         colorByPoint: true,
         data: [{
           name: '共同生活',

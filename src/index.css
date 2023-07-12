@@ -216,6 +216,14 @@ hr {
     width: 100%;
   }
 
+  .react-select-year {
+    z-index: 3;
+  }
+
+  .react-select-county {
+    z-index: 2;
+  }
+
   .submit-btn {
     display: block;
     width: 100%;

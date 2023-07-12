@@ -10,7 +10,7 @@ function MyComponent({ optionArray, isDisabled, selectHandler, year }) {
   })
   
   return (
-    <div className='react-select'>
+    <div className='react-select react-select-year'>
       <label htmlFor='year' id='yearLabel' className={isDisabled ? "disabled" : ''}>年份</label>
       <Select
         form='form'

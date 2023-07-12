@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useStateContext } from '../lib/Context';
+import {
+  useStateContext, getData, getCountyDistrict, getStatistic, getBarChartOptions, getPieChartOptions,
+} from '../lib/index';
 import Result from './Result';
 import LoadingPage from './LoadingPage';
-import getData from '../lib/getData';
-import getCountyDistrict from '../lib/getCountyDistrict';
-import getStatistic from '../lib/getStatistic';
-import getBarChartOptions from '../lib/getBarChartOptions';
-import getPieChartOptions from '../lib/getPieChartOptions';
 
 function ResultLoader() {
   const {

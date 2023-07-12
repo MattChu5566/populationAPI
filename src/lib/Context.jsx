@@ -14,7 +14,7 @@ export function ContextProvider(props) {
   const countyIsSelected = useRef(false);
   const districtIsSelected = useRef(false);
 
-  const data = useRef([]);
+  const data = useRef(null);
 
   const countyOptionsRef = useRef([]);
   const districtOptionsRef = useRef([]);

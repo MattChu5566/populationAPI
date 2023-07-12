@@ -4,10 +4,11 @@ import './index.css';
 // import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
-import Root from './routes/root';
+import Root from './components/Root';
 import { ContextProvider } from './lib/Context';
-import { Navbar, Background, RouteErrorPage } from './components/index';
-import ResultLoader from './components/ResultLoader';
+import {
+  Navbar, Background, RouteErrorPage, ResultLoader,
+} from './components/index';
 
 const router = createBrowserRouter([
   {

@@ -1,12 +1,8 @@
 import { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Outlet } from 'react-router-dom';
-import getCountyDistrict from '../lib/getCountyDistrict';
-import getData from '../lib/getData';
-import { useStateContext } from '../lib/Context';
-import YearReactSelect from '../components/YearReactSelect';
-import CountyReactSelect from '../components/CountyReactSelect';
-import DistrictReactSelect from '../components/DistrictReactSelect';
+import { useStateContext, getCountyDistrict, getData } from '../lib/index';
+import { YearReactSelect, CountyReactSelect, DistrictReactSelect } from './index';
 
 export default function Root() {
   const {
