@@ -10,7 +10,7 @@ function MyComponent({ optionArray, isDisabled, selectHandler, year, county, cou
   })
 
   return (
-    <div className='react-select'>
+    <div className='react-select react-select-wide'>
       <label htmlFor='county' id='countyLabel' className={isDisabled ? "disabled" : ''}>縣/市</label>
       <Select
         form='form'
@@ -33,7 +33,6 @@ function MyComponent({ optionArray, isDisabled, selectHandler, year, county, cou
         styles={{
           container: (baseStyles, state) => ({
             ...baseStyles,
-            width: '120px',
           }),
           control: (baseStyles, state) => ({
             ...baseStyles,

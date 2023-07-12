@@ -3,6 +3,8 @@ export default function getBarChartOptions(statisticMap) {
     {
       chart: {
         type: 'column',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
+        margin: [50, 0, 50, 50],
       },
       title: {
         text: '人口數統計',
@@ -26,7 +28,7 @@ export default function getBarChartOptions(statisticMap) {
             color: 'black',
             fontWeight: '700',
             fontSize: '14px',
-            translate: '5px 30px',
+            translate: '10px 30px',
           },
         },
       },
@@ -39,6 +41,7 @@ export default function getBarChartOptions(statisticMap) {
           format: '{point.y}',
           style: {
             fontSize: '14px',
+            color: 'black',
           },
           allowOverlap: true,
           padding: 40,
@@ -51,6 +54,7 @@ export default function getBarChartOptions(statisticMap) {
           format: '{point.y}',
           style: {
             fontSize: '14px',
+            color: 'black',
           },
           allowOverlap: true,
         },

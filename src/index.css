@@ -13,7 +13,7 @@ code {
 }
 
 .navbar {
-  background-color: rgb(100, 0, 255);
+  background-color: rgb(101, 31, 255);
   height: 40px;
   display: flex;
   align-items: center;
@@ -30,10 +30,10 @@ code {
 .option {
   width: 25px;
   height: 25px;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  color:white;
+  color: white;
   margin-right: 10px;
   border: 1px rgb(150, 150, 150) solid;
   border-radius: 5px;
@@ -81,6 +81,13 @@ form {
 .react-select {
   position: relative;
   height: fit-content;
+  display: block;
+  width: 60px;
+}
+
+.react-select-wide {
+  display: block;
+  width: 120px;
 }
 
 label {
@@ -97,7 +104,7 @@ label.focus {
 }
 
 label.disabled {
-  color:rgb(200, 200, 200);
+  color: rgb(200, 200, 200);
 }
 
 .submit-btn {
@@ -144,6 +151,7 @@ hr {
 
 .result-wrapper {
   text-align: center;
+  width: 80%;
 }
 
 .loading-img-wrapper {
@@ -151,10 +159,11 @@ hr {
   justify-content: center;
 }
 
-@keyframes rotate{
+@keyframes rotate {
   0% {
     transform: rotate(0);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -166,3 +175,65 @@ hr {
   animation: 0.7s linear infinite rotate;
 }
 
+@media only screen and (max-width: 820px) {
+  .bg-layout {
+    display: block;
+    position: relative;
+  }
+
+  .bg-wrapper {
+    position: relative;
+    z-index: -1;
+    opacity: 30%;
+  }
+
+  .query-wrapper {
+    position: absolute;
+    top: 0px;
+    width: 95vw;
+    margin-left: 1.5vw;
+    margin-right: 3.5vw;
+  }
+
+  h2 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    overflow-wrap: normal;
+  }
+
+  form {
+    align-self: start;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .react-select-wide {
+    width: 100%;
+  }
+
+  .submit-btn {
+    display: block;
+    width: 100%;
+    background-color: rgb(101, 31, 255);
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  hr {
+    position: relative;
+    top: 180px;
+  }
+
+  .search-result-wrapper {
+    position: relative;
+    top: 145px;
+  }
+
+  .result-wrapper {
+    position: relative;
+    top: 180px;
+    width: 100%;
+  }
+}

@@ -49,10 +49,10 @@ function Result() {
   });
 
   return (
-    <div>
+    <div className="result-wrapper">
       {isLoading ? <LoadingPage />
         : (
-          <div className="result-wrapper">
+          <div>
             <h2 className="">
               {`${UrlParams.year}年 ${UrlParams.county} ${UrlParams.district}`}
             </h2>
@@ -61,7 +61,7 @@ function Result() {
               options={chartOptions[0]}
               containerProps={{
                 style: {
-                  width: '80%', height: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '100px',
+                  marginLeft: 'auto', marginRight: 'auto', marginBottom: '100px',
                 },
               }}
             />
@@ -70,7 +70,7 @@ function Result() {
               options={chartOptions[1]}
               containerProps={{
                 style: {
-                  width: '80%', height: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '100px',
+                  marginLeft: 'auto', marginRight: 'auto', marginBottom: '100px',
                 },
               }}
             />

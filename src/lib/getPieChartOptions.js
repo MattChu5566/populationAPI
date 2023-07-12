@@ -6,6 +6,7 @@ export default function getPieChartOptions(statisticMap) {
         plotBorderWidth: null,
         plotShadow: false,
         type: 'pie',
+        backgroundColor: 'rgba(0, 0, 0, 0)',
       },
       title: {
         text: '戶數統計',
@@ -27,6 +28,7 @@ export default function getPieChartOptions(statisticMap) {
             format: '{point.percentage:.1f} %',
             style: {
               fontSize: '14px',
+              color: 'black',
             },
           },
           slicedOffset: '0',

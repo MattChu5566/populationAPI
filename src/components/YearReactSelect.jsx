@@ -33,7 +33,6 @@ function MyComponent({ optionArray, isDisabled, selectHandler, year }) {
         styles={{
           container: (baseStyles, state) => ({
             ...baseStyles,
-            width: '60px',
           }),
           control: (baseStyles, state) => ({
             ...baseStyles,

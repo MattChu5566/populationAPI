@@ -135,9 +135,7 @@ export default function Root() {
         </div>
       </div>
 
-      <div style={{ width: '80%' }}>
-        <Outlet />
-      </div>
+      <Outlet />
 
     </div>
   );
