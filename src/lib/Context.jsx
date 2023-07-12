@@ -16,9 +16,6 @@ export function ContextProvider(props) {
 
   const data = useRef(null);
 
-  const countyOptionsRef = useRef([]);
-  const districtOptionsRef = useRef([]);
-
   const { children } = props;
   return (
     <Context.Provider
@@ -32,8 +29,6 @@ export function ContextProvider(props) {
         countyIsSelected,
         districtIsSelected,
         data,
-        countyOptionsRef,
-        districtOptionsRef,
       }}
     >
       {children}

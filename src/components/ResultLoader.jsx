@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  useStateContext, getData, getCountyDistrict, getStatistic, getBarChartOptions, getPieChartOptions,
+  useStateContext, getData, getStatistic, getBarChartOptions, getPieChartOptions,
 } from '../lib/index';
 import Result from './Result';
 import LoadingPage from './LoadingPage';
 
 function ResultLoader() {
   const {
-    data, countyOptionsRef, districtOptionsRef,
+    data,
     setYear, setCounty, setDistrict, countyIsSelected, districtIsSelected,
   } = useStateContext();
 
@@ -21,11 +21,9 @@ function ResultLoader() {
 
   const UrlParams = useParams();
 
-  const fetchDataSetOptions = async (y, c) => {
+  const fetchDataSetOptions = async (y) => {
     const responseData = await getData(y);
     data.current = responseData;
-    [countyOptionsRef.current] = getCountyDistrict(responseData);
-    districtOptionsRef.current = getCountyDistrict(data.current)[1].get(c);
     countyIsSelected.current = true;
     districtIsSelected.current = true;
     onMount.current = false;
@@ -41,24 +39,24 @@ function ResultLoader() {
     setChartOptions([barChartOptions, pieChartOptions]);
   }
 
-  const fetching = async () => {
+  const fetchingOnMount = async () => {
     try {
       const testResponse = await fetch(`https://www.ris.gov.tw/rs-opendata/api/v1/datastore/ODRP019/${UrlParams.year}?COUNTY=${UrlParams.county}&TOWN=${UrlParams.district}`);
       const testResult = await testResponse.json();
       if (testResult.responseMessage === '查無資料') throw new Error('查無資料');
       await fetchDataSetOptions(UrlParams.year, UrlParams.county);
       createChart();
-      setIsLoading(false);
     } catch (e) {
       onMount.current = false;
-      setIsLoading(false);
       setError(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     if (onMount.current) {
-      fetching();
+      fetchingOnMount();
     }
     return () => { onMount.current = false; };
   });

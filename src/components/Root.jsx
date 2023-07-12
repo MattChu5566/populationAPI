@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Outlet } from 'react-router-dom';
-import { useStateContext, getCountyDistrict, getData } from '../lib/index';
+import {
+  useStateContext, getCounty, getData, getDistrict,
+} from '../lib/index';
 import { YearReactSelect, CountyReactSelect, DistrictReactSelect } from './index';
 
 export default function Root() {
@@ -11,11 +13,10 @@ export default function Root() {
     district, setDistrict,
     countyIsSelected, districtIsSelected,
     data,
-    countyOptionsRef, districtOptionsRef,
   } = useStateContext();
 
-  const countyOptions = countyOptionsRef.current;
-  const districtOptions = districtOptionsRef.current;
+  const countyOptions = getCounty(data.current);
+  const districtOptions = getDistrict(data.current, county);
   const yearOptions = useMemo(() => {
     const years = [];
     for (let i = 111; i >= 106; i -= 1) {
@@ -24,23 +25,9 @@ export default function Root() {
     return years;
   }, []);
 
-  const getDataOnYearChange = async (yearSelected) => {
-    const responseData = await getData(yearSelected);
-    data.current = responseData;
-  };
-  const getCountyOptions = () => {
-    [countyOptionsRef.current] = getCountyDistrict(data.current);
-  };
-
   const clearCountyOptions = () => {
     countyIsSelected.current = false;
     setCounty('');
-  };
-
-  const getDistrictOptions = (countySelected) => {
-    const [, districtMap] = getCountyDistrict(data.current);
-    const districtArray = districtMap.get(countySelected);
-    districtOptionsRef.current = districtArray;
   };
 
   const clearDistrictOptions = () => {
@@ -72,12 +59,10 @@ export default function Root() {
               clearCountyOptions();
               clearDistrictOptions();
               setYear('');
-              getDataOnYearChange(selectedOption.value)
+              getData(selectedOption.value)
                 .then(
-                  () => getCountyOptions(),
-                )
-                .then(
-                  () => {
+                  (responseData) => {
+                    data.current = responseData;
                     setYear(selectedOption.value);
                   },
                 );
@@ -95,7 +80,6 @@ export default function Root() {
           selectHandler={(selectedOption) => {
             if (selectedOption.value !== county) {
               clearDistrictOptions();
-              getDistrictOptions(selectedOption.value);
               countyIsSelected.current = true;
               districtIsSelected.current = false;
               setCounty(selectedOption.value);
