@@ -33,7 +33,7 @@ export function ContextProvider(props) {
         districtIsSelected,
         data,
         countyOptionsRef,
-        districtOptionsRef
+        districtOptionsRef,
       }}
     >
       {children}
