@@ -36,7 +36,7 @@ function MyComponent({ optionArray, isDisabled, selectHandler, year, county, cou
           }),
           control: (baseStyles, state) => ({
             ...baseStyles,
-            outline: state.isFocused ? '2px solid rgb(162, 0, 255)' : '',
+            outline: state.isFocused ? '2px solid rgb(139, 87, 255)' : '',
             background: 'white'
           }),
           valueContainer: (baseStyles, state) => ({

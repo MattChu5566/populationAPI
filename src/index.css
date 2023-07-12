@@ -100,7 +100,7 @@ label {
 }
 
 label.focus {
-  color: rgb(162, 0, 255);
+  color: rgb(139, 87, 255);
 }
 
 label.disabled {
@@ -120,10 +120,14 @@ label.disabled {
   height: 38px;
 }
 
+.submit-btn:hover {
+  cursor: pointer;
+}
+
 hr {
   border: none;
-  border-top: 3px solid rgb(235, 200, 255);
-  color: rgb(235, 200, 255);
+  border-top: 3px solid rgb(232, 219, 255);
+  color: rgb(232, 219, 255);
   overflow: visible;
   text-align: center;
   height: 5px;
@@ -139,13 +143,13 @@ hr {
 }
 
 .search-result {
-  border: 2px solid rgb(216, 150, 255);
+  border: 2px solid rgb(217, 195, 255);
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 20%/50%;
   text-align: center;
-  color: rgb(216, 150, 255);
+  color: rgb(217, 195, 255);
   background-color: white;
 }
 

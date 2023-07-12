@@ -4,7 +4,7 @@ export default function getBarChartOptions(statisticMap) {
       chart: {
         type: 'column',
         backgroundColor: 'rgba(0, 0, 0, 0)',
-        margin: [50, 0, 50, 50],
+        margin: [70, 0, 50, 50],
       },
       title: {
         text: '人口數統計',
@@ -28,7 +28,7 @@ export default function getBarChartOptions(statisticMap) {
             color: 'black',
             fontWeight: '700',
             fontSize: '14px',
-            translate: '10px 30px',
+            translate: '10px 50px',
           },
         },
       },
