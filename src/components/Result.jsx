@@ -8,6 +8,7 @@ import getCountyDistrict from '../lib/getCountyDistrict';
 import getStatistic from '../lib/getStatistic';
 import getBarChartOptions from '../lib/getBarChartOptions';
 import getPieChartOptions from '../lib/getPieChartOptions';
+import LoadingPage from './LoadingPage';
 
 function Result() {
   const [chartOptions, setChartOptions] = useState([]);
@@ -49,7 +50,7 @@ function Result() {
 
   return (
     <div>
-      {isLoading ? <div>Loading</div>
+      {isLoading ? <LoadingPage />
         : (
           <div className="result-wrapper">
             <h2 className="">
@@ -80,8 +81,3 @@ function Result() {
 }
 
 export default Result;
-
-// export async function resultLoader() {
-//   const p = await new Promise((res) => { setTimeout(() => res('test'), 3000); });
-//   return p;
-// }

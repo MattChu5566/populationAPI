@@ -146,24 +146,23 @@ hr {
   text-align: center;
 }
 
-/* .highcharts-color-0 {
-  fill: rgb(125, 95, 177);
+.loading-img-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
-.highcharts-color-1 {
-  fill:rgb(193, 158, 254);
+@keyframes rotate{
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.highcharts-color-0 rect {
-  fill: rgb(125, 95, 177);
+.loading-img {
+  width: 30px;
+  margin-top: 200px;
+  animation: 0.7s linear infinite rotate;
 }
-
-.highcharts-color-1 rect {
-  fill:rgb(193, 158, 254);
-} */
-
-/* .highcharts-yaxis {
-  translate: 0 30px;
-} */
-
 
