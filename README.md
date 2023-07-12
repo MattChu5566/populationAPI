@@ -1,3 +1,14 @@
+## About
+This is a practicing APP utilizing [government's API](https://data.gov.tw/dataset/14299).
+Tools:
+-[React Router](https://reactrouter.com/en/main)
+-[React Select](https://react-select.com/home)
+-[React Icons](https://react-icons.github.io/react-icons/)
+-[HighCharts](https://www.highcharts.com/)
+-[highcharts-react](https://github.com/highcharts/highcharts-react)
+
+Welcome to take a look at [https://population-api-sooty.vercel.app/](https://population-api-sooty.vercel.app/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
